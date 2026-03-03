@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Income Collective — Stacy La</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Nunito:wght@300;400;500;600;700;800;900&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --cream: #FAF6F0;
+    --warm: #F5EDE0;
+    --terra: #C2714F;
+    --terra-light: #D98B68;
+    --terra-pale: rgba(194,113,79,0.1);
+    --terra-border: rgba(194,113,79,0.2);
+    --blush: #F0C4B0;
+    --sage: #8FAF8A;
+    --sage-pale: rgba(143,175,138,0.12);
+    --ink: #2A1F18;
+    --ink-mid: #5C4A3A;
+    --muted: #A89080;
+    --rule: #E8DDD2;
+    --white: #FEFCFA;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* subtle paper texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9998;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 52px;
+    background: rgba(250,246,240,0.94);
+    border-bottom: 1px solid var(--rule);
+    backdrop-filter: blur(12px);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--terra);
+    border-radius: 50%;
+  }
+
+  .logo-text {
+    font-family: 'Instrument Serif', serif;
+    font-size: 19px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .logo-text em { color: var(--terra); font-style: italic; }
+
+  .nav-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--terra-pale);
+    border: 1px solid var(--terra-border);
+    border-radius: 100px;
+    padding: 7px 18px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--terra);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* wavy blush bg shape */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(240,196,176,0.35) 0%, transparent 65%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* ── LEFT ── */
+  .hero-left {
+    padding: 88px 52px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-top {}
+
+  .hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--terra);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: up 0.5s 0.1s forwards;
+  }
+
+  .hero-headline {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(52px, 6vw, 86px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 28px;
+    max-width: 680px;
+    opacity: 0;
+    animation: up 0.7s 0.2s forwards;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--terra);
+  }
+
+  /* handwritten underline effect */
+  .hero-headline .underlined {
+    position: relative;
+    display: inline;
+  }
+  .hero-headline .underlined::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--terra-light);
+    border-radius: 2px;
+    opacity: 0.6;
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--ink-mid);
+    line-height: 1.78;
+    max-width: 500px;
+    margin-bottom: 44px;
+    opacity: 0;
+    animation: up 0.7s 0.32s forwards;
+  }
+  .hero-sub strong { color: var(--ink); font-weight: 700; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--terra);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 800;
+    padding: 18px 36px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    opacity: 0;
+    animation: up 0.6s 0.44s forwards;
+  }
+  .btn:hover {
+    background: var(--terra-light);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(194,113,79,0.28);
+  }
+  .arr { transition: transform 0.2s; }
+  .btn:hover .arr { transform: translateX(4px); }
+
+  /* anti-bs note */
+  .hero-antibs {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 16px;
+    opacity: 0;
+    animation: fadein 0.5s 0.7s forwards;
+  }
+
+  /* stat row */
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    padding-top: 36px;
+    border-top: 1px solid var(--rule);
+    opacity: 0;
+    animation: fadein 0.6s 0.8s forwards;
+  }
+
+  .hs {
+    display: flex;
+    flex-direction: column;
+  }
+  .hs-n {
+    font-family: 'Instrument Serif', serif;
+    font-size: 30px;
+    color: var(--terra);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .hs-l {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  /* ── RIGHT: FIRST DOLLAR CARD ── */
+  .hero-right {
+    background: var(--white);
+    border-left: 1px solid var(--rule);
+    padding: 52px 44px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: up 0.8s 0.3s forwards;
+  }
+
+  /* decorative blush blob */
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    right: -80px;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(240,196,176,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  /* BIG $1 moment */
+  .dollar-moment {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px;
+    background: linear-gradient(135deg, var(--terra), var(--terra-light));
+    border-radius: 16px;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .dollar-big {
+    font-family: 'Instrument Serif', serif;
+    font-size: 72px;
+    color: rgba(255,255,255,0.9);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .dollar-text {
+    flex: 1;
+  }
+
+  .dollar-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .dollar-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+  }
+
+  /* roadmap steps */
+  .roadmap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .road-step {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: center;
+    transition: padding-left 0.2s;
+    cursor: default;
+  }
+  .road-step:last-child { border-bottom: none; }
+  .road-step:hover { padding-left: 6px; }
+
+  .step-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .step-circle.s1 { background: var(--terra); }
+  .step-circle.s2 { background: var(--terra-light); }
+  .step-circle.s3 { background: var(--blush); color: var(--ink); }
+  .step-circle.s4 { background: var(--sage); }
+
+  .step-text { flex: 1; }
+
+  .step-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .step-desc {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .step-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--terra);
+    background: var(--terra-pale);
+    padding: 4px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  /* ── MIDDLE: THE 3 SHIFTS ── */
+  .shifts {
+    padding: 100px 52px;
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* warm blob on dark */
+  .shifts::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(194,113,79,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .shifts-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 64px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    z-index: 1;
+  }
+
+  .shifts-headline {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(44px, 5vw, 70px);
+    line-height: 1.0;
+    color: var(--cream);
+    letter-spacing: -0.02em;
+  }
+  .shifts-headline em { font-style: italic; color: var(--terra-light); }
+
+  .shifts-desc {
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(250,246,240,0.5);
+    line-height: 1.8;
+    max-width: 380px;
+  }
+
+  /* shift cards — horizontal with emoji icon */
+  .shift-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    position: relative;
+    z-index: 1;
+  }
+
+  .shift-card {
+    background: var(--ink);
+    padding: 44px 36px;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .shift-card:hover { background: rgba(255,255,255,0.03); }
+
+  .shift-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--terra), var(--blush));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s;
+  }
+  .shift-card:hover::before { transform: scaleX(1); }
+
+  .shift-emoji {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  .shift-from {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(250,246,240,0.25);
+    margin-bottom: 8px;
+    text-decoration: line-through;
+    text-decoration-color: rgba(250,246,240,0.1);
+  }
+
+  .shift-to-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terra-light);
+    margin-bottom: 8px;
+  }
+
+  .shift-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .shift-body {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(250,246,240,0.45);
+    line-height: 1.75;
+  }
+
+  /* ── CLIFFHANGER ── */
+  .cliff {
+    padding: 110px 52px;
+    background: var(--warm);
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* large $ watermark */
+  .cliff-wm {
+    position: absolute;
+    bottom: -120px;
+    right: -40px;
+    font-family: 'Instrument Serif', serif;
+    font-size: 600px;
+    color: rgba(194,113,79,0.05);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .cliff-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .cliff-kicker {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terra);
+    margin-bottom: 20px;
+  }
+
+  .cliff-headline {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(44px, 5.5vw, 76px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .cliff-headline em { font-style: italic; color: var(--terra); }
+
+  .cliff-body {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--ink-mid);
+    line-height: 1.8;
+    margin-bottom: 36px;
+    max-width: 420px;
+  }
+  .cliff-body strong { color: var(--ink); font-weight: 700; }
+
+  .cliff-note {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 14px;
+  }
+
+  /* blurred community wins */
+  .wins-wrap {
+    position: relative;
+  }
+
+  .wins-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .wins-window {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(42,31,24,0.1);
+  }
+
+  .wins-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--cream);
+  }
+
+  .wins-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .wins-title em { font-style: italic; color: var(--terra); }
+
+  .wins-live {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--sage);
+  }
+  .wins-live-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--sage);
+    border-radius: 50%;
+    animation: pulse 1.8s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .wins-feed {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    filter: blur(5px);
+    opacity: 0.22;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .win-card {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .win-av {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Instrument Serif', serif;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+    color: #fff;
+  }
+  .win-av.a { background: var(--terra); }
+  .win-av.b { background: var(--sage); }
+  .win-av.c { background: var(--blush); color: var(--ink); }
+
+  .win-body { flex: 1; }
+
+  .win-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .win-text {
+    font-size: 13px;
+    color: var(--ink-mid);
+    line-height: 1.5;
+  }
+
+  .win-amount {
+    font-family: 'Instrument Serif', serif;
+    font-size: 15px;
+    color: var(--terra);
+    font-style: italic;
+  }
+
+  .win-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .win-heart {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .wins-overlay {
+    position: absolute;
+    inset: 0;
+    top: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(250,246,240,0.75);
+    backdrop-filter: blur(2px);
+    border-radius: 0 0 16px 16px;
+  }
+
+  .lock-emoji { font-size: 22px; }
+
+  .lock-label {
+    font-family: 'Instrument Serif', serif;
+    font-size: 17px;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  .lock-sub {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  /* handwritten note */
+  .handnote {
+    font-family: 'Kalam', cursive;
+    font-size: 16px;
+    color: var(--terra);
+    margin-top: 16px;
+    transform: rotate(-1deg);
+    display: inline-block;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes up {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.on { opacity: 1; transform: none; }
+  .d1 { transition-delay: 0.12s; }
+  .d2 { transition-delay: 0.24s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    <div class="logo-text">Digital Income <em>Collective</em></div>
+  </div>
+  <div class="nav-badge">✨ No tech bro energy here</div>
+</nav>
+
+<!-- ① HERO -->
+<section class="hero">
+
+  <!-- LEFT -->
+  <div class="hero-left">
+    <div class="hero-top">
+      <div class="hero-kicker">✦ by Stacy La — Canadian creator & online income mentor</div>
+
+      <h1 class="hero-headline">
+        Your <em>First Dollar</em><br>
+        Online Is <span class="underlined">Closer</span><br>
+        Than You Think.
+      </h1>
+
+      <p class="hero-sub">
+        The Digital Income Collective is where Stacy La teaches real people how to build real online income — through <strong>practical strategies that actually work</strong> in today's market.
+      </p>
+
+      <a href="#" class="btn">
+        Join the Collective <span class="arr">→</span>
+      </a>
+      <div class="hero-antibs">🙅‍♀️ Anti-BS · Anti-hustle-bro · Just what works</div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hs">
+        <div class="hs-n">461K</div>
+        <div class="hs-l">TikTok Followers</div>
+      </div>
+      <div class="hs">
+        <div class="hs-n">6-Fig</div>
+        <div class="hs-l">Quit Her Day Job</div>
+      </div>
+      <div class="hs">
+        <div class="hs-n">1.9M</div>
+        <div class="hs-l">TikTok Likes</div>
+      </div>
+      <div class="hs">
+        <div class="hs-n">$0</div>
+        <div class="hs-l">To Start</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: FIRST DOLLAR ROADMAP CARD -->
+  <div class="hero-right">
+    <div class="card-label">Your roadmap inside the collective →</div>
+
+    <div class="dollar-moment">
+      <div class="dollar-big">$1</div>
+      <div class="dollar-text">
+        <div class="dollar-title">Your First Dollar Online</div>
+        <div class="dollar-sub">The moment everything changes. Here's how you get there.</div>
+      </div>
+    </div>
+
+    <div class="roadmap">
+      <div class="road-step">
+        <div class="step-circle s1">1</div>
+        <div class="step-text">
+          <div class="step-title">Pick your income path</div>
+          <div class="step-desc">Digital products, affiliate marketing, or AI-powered content — Stacy shows you which fits your life.</div>
+        </div>
+        <div class="step-tag">Week 1</div>
+      </div>
+
+      <div class="road-step">
+        <div class="step-circle s2">2</div>
+        <div class="step-text">
+          <div class="step-title">Build your foundation</div>
+          <div class="step-desc">Set up your platform, your offer, and your content without the tech overwhelm.</div>
+        </div>
+        <div class="step-tag">Week 2</div>
+      </div>
+
+      <div class="road-step">
+        <div class="step-circle s3">3</div>
+        <div class="step-text">
+          <div class="step-title">Post content that pays</div>
+          <div class="step-desc">Anti-BS content strategy. Stop posting into the void. Start getting paid for what you create.</div>
+        </div>
+        <div class="step-tag">Week 3</div>
+      </div>
+
+      <div class="road-step">
+        <div class="step-circle s4">4</div>
+        <div class="step-text">
+          <div class="step-title">First sale. Then consistency.</div>
+          <div class="step-desc">Close your first dollar, then build the systems to make it happen again and again.</div>
+        </div>
+        <div class="step-tag">Week 4+</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ② THE 3 SHIFTS -->
+<section class="shifts">
+  <div class="shifts-header reveal">
+    <h2 class="shifts-headline">
+      Making Money<br>
+      Online Isn't Magic.<br>
+      It's a <em>Skill.</em>
+    </h2>
+    <p class="shifts-desc">
+      And like any skill, it can be taught, learned, and mastered. Here's what shifts when you finally have the right roadmap, tools, and community behind you.
+    </p>
+  </div>
+
+  <div class="shift-cards">
+    <div class="shift-card reveal">
+      <div class="shift-emoji">😮‍💨</div>
+      <div class="shift-from">Posting into the void</div>
+      <div class="shift-to-label">→ The Shift</div>
+      <div class="shift-title">Content that actually earns</div>
+      <p class="shift-body">Stop creating for the algorithm and start creating for income. Stacy's anti-BS content system turns your posts into a consistent revenue channel.</p>
+    </div>
+
+    <div class="shift-card reveal d1">
+      <div class="shift-emoji">🤯</div>
+      <div class="shift-from">Overwhelmed by the tech</div>
+      <div class="shift-to-label">→ The Shift</div>
+      <div class="shift-title">A clear path, not a maze</div>
+      <p class="shift-body">No CS degree. No complicated setup. Stacy built the Collective for real people — the exact tools and steps without the jargon, gatekeeping, or tech bro energy.</p>
+    </div>
+
+    <div class="shift-card reveal d2">
+      <div class="shift-emoji">💸</div>
+      <div class="shift-from">Income that never sticks</div>
+      <div class="shift-to-label">→ The Shift</div>
+      <div class="shift-title">Your first consistent stream</div>
+      <p class="shift-body">From zero to your first dollar, then first $100, then consistent monthly income. The Collective gives you the roadmap and the community to hold you to it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ③ CLIFFHANGER -->
+<section class="cliff">
+  <div class="cliff-wm">$</div>
+
+  <div class="cliff-inner">
+    <div class="reveal">
+      <div class="cliff-kicker">✦ Inside the Collective</div>
+      <h2 class="cliff-headline">
+        Real People.<br>
+        Real <em>First</em><br>
+        Dollars.
+      </h2>
+      <p class="cliff-body">
+        <strong>Making money online isn't magic — it's a skill.</strong> And Stacy has built the exact roadmap, tools, and community support to take you from zero to your first consistent income stream online.
+      </p>
+      <a href="#" class="btn">Join the Collective →</a>
+      <span class="cliff-note">🙅‍♀️ No tech bro energy · No fluff · Just results</span>
+      <div class="handnote">you've got this ✨</div>
+    </div>
+
+    <!-- blurred community wins feed -->
+    <div class="wins-wrap reveal d2">
+      <div class="wins-label">Community wins — members only</div>
+      <div class="wins-window">
+        <div class="wins-header">
+          <div class="wins-title">Digital Income <em>Collective</em></div>
+          <div class="wins-live"><div class="wins-live-dot"></div> Live wins</div>
+        </div>
+
+        <div class="wins-feed">
+          <div class="win-card">
+            <div class="win-av a">J</div>
+            <div class="win-body">
+              <div class="win-name">Jessica M.</div>
+              <div class="win-text">Just made <span class="win-amount">$340</span> from my first digital product! I've been trying to do this for 2 years. Stacy's method made it click 🥹</div>
+              <div class="win-footer"><div class="win-heart">❤️ 94  💬 28</div></div>
+            </div>
+          </div>
+
+          <div class="win-card">
+            <div class="win-av b">T</div>
+            <div class="win-body">
+              <div class="win-name">Tara K.</div>
+              <div class="win-text">Month 2 in the collective. First affiliate commission hit — <span class="win-amount">$127!</span> Small but it's REAL and I did it myself 🙌</div>
+              <div class="win-footer"><div class="win-heart">🧡 61  💬 19</div></div>
+            </div>
+          </div>
+
+          <div class="win-card">
+            <div class="win-av c">N</div>
+            <div class="win-body">
+              <div class="win-name">Nicole R.</div>
+              <div class="win-text">Quit my 9-5 last week. Built up to <span class="win-amount">$4,200/month</span> in 6 months using exactly what Stacy teaches. No coding, no ads, just content.</div>
+              <div class="win-footer"><div class="win-heart">🔥 203  💬 87</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wins-overlay">
+          <div class="lock-emoji">🔒</div>
+          <div class="lock-label">Join to see inside</div>
+          <div class="lock-sub">Real wins from real members, posted daily</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('on')), { threshold: 0.08 });
+  els.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
